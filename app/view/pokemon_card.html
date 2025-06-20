@@ -1,0 +1,28 @@
+<!-- BEGIN main -->
+    <link rel="stylesheet" href="../../app/resources/styles_cards.css">
+    <div class="card-flipped">
+        <div class="card-front">
+            <div class="pokemon-card-front" id="pokemon-card-<?= $id ?>" data-id="<?= $id ?>">
+                <div>
+                    <h2>{nome}</h2>
+                </div>
+                <div class="type-card">
+                    <span class="type">{tipo}</span>
+                </div>
+                <div class="card-image-front">
+                    <img src="{imagem}">
+                </div>
+                <div class="card-footer">
+                    <p class="descricao">{descricao}</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-back">
+            <div class="pokemon-card-back" id="pokemon-card-<?= $id ?>" data-id="<?= $id ?>">
+                <div class="card-image-back">
+                    <img src="images/pokemon_back_of_card.bmp" class="card-img">
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- END main -->
