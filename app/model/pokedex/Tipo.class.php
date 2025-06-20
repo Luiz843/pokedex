@@ -22,6 +22,7 @@ class Tipo extends TRecord
     {
         parent::__construct($id, $callObjectLoad);
         parent::addAttribute('name');
+        parent::addAttribute('name_pt');
         parent::addAttribute('cor');
         parent::addAttribute('icone');
     }

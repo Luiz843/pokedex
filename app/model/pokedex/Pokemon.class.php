@@ -21,8 +21,9 @@ class Pokemon extends TRecord{
     public function __construct($id = null, $callObjectLoad = true) {
 
         parent::__construct($id, $callObjectLoad);
-        parent::addAttribute('nome');
-        parent::addAttribute('tipo');
+        parent::addAttribute('api_id');
+        parent::addAttribute('name');
+        parent::addAttribute('tipo_id');
         parent::addAttribute('imagem');
         parent::addAttribute('descricao');
     }
