@@ -5,7 +5,7 @@ return [
     'fire'     => ['color' => '#EE8130', 'icon' => 'fa-solid fa-fire'],           // laranja — fogo
     'water'    => ['color' => '#6390F0', 'icon' => 'fa-solid fa-droplet'],        // azul claro — gota d’água
     'electric' => ['color' => '#F7D02C', 'icon' => 'fa-solid fa-bolt'],           // amarelo forte — raio
-    'grass'    => ['color' => '#7AC74C', 'icon' => 'fa-solid fa-leaf'],           // verde vivo — folha
+    'grass'    => ['color' => '#7AC74C', 'icon' => 'fa-solid fa-envira'],           // verde vivo — folha
     'ice'      => ['color' => '#96D9D6', 'icon' => 'fa-regular fa-snowflake'],    // azul gelo — floco de neve
     'fighting' => ['color' => '#C22E28', 'icon' => 'fa-solid fa-hand-fist'],      // vermelho escuro — punho
     'poison'   => ['color' => '#A33EA1', 'icon' => 'fa-solid fa-skull-crossbones'], // roxo — veneno

@@ -45,8 +45,15 @@ class PokemonList extends TPage
 
         $repo = new TRepository('Pokemon');
         $criteria = new TCriteria();
-        $criteria->setProperty('order', 'nome');
+        // $criteria->setProperty('order', 'name');
+        $criteria->add(new TFilter('id', '=', '1')); // filtra apenas pokemons ativos
         $this->pokemons = $repo->load($criteria);
+
+        $tipos = new TRepository('Tipo');
+        $criteria = new TCriteria();
+        $criteria->setProperty('order', 'id');
+        $tipos = $tipos->load($criteria);
+
         TTransaction::close();
 
         $cards = new TCardView();
@@ -58,14 +65,18 @@ class PokemonList extends TPage
             if(!isset($pokemon->imagem)){
                 $pokemon->imagem = 'images/pokemon_default.png';
             }
+            foreach ($tipos as $tipo) {
+                if ($pokemon->tipo_id == $tipo->id) {
+                    $pokemon->color = $tipo->cor;
+                    $pokemon->name_pt = $tipo->name_pt;
+                    $pokemon->icone = $tipo->icone;
+                }
+            }
             $pokemon->isFlipped = false;
             $pokemon->id = $id;
             $cards->addItem($pokemon);
             $id++;
         }
-
-        TScript::create("
-            ");
 
         $scroll_wrapper = new TElement('div');
         // $scroll_wrapper->style = 'overflow-x: scroll;';
@@ -117,7 +128,7 @@ class PokemonList extends TPage
 
             $repo = new TRepository('Pokemon');
             $criteria = new TCriteria();
-            $criteria->setProperty('order', 'nome');
+            $criteria->setProperty('order', 'name');
             $this->pokemons = $repo->load($criteria);
             // fecha a transação
             TTransaction::close();
