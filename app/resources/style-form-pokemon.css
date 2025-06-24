@@ -1,0 +1,13 @@
+/* Torna o card do formulário transparente */
+#form_pokemon_list ~ .card.panel {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Alternativa mais direta e robusta */
+.card.panel[form="form_pokemon_list"] {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}

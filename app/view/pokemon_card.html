@@ -3,7 +3,7 @@
     <div class="card-flipped">
         <div class="card-front">
             <div class="pokemon-card-front" id="pokemon-card-<?= $id ?>" data-id="<?= $id ?>" style="background-color: {color};">
-                <div>
+                <div class="pokemon-name">
                     <h2>{name}</h2>
                 </div>
                 <div class="type-card">
@@ -12,7 +12,7 @@
                     </span>
                 </div>
                 <div class="card-image-front">
-                    <img src="{imagem}">
+                    <img class="img" src="{imagem}">
                 </div>
                 <div class="card-footer">
                     <p class="descricao">{descricao}</p>

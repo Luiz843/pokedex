@@ -531,7 +531,7 @@ div[page_name="SystemContactsList"] .card {
     overflow: visible;
     border-radius: var(--bs-border-radius);
     border: var(--bs-border-width) solid var(--bs-border-color);
-     
+
 }
 #table_list_container .table-list .card .card-header
 {
@@ -616,7 +616,7 @@ div:where(.swal2-container) {
 
 .system-drive .system-drive-container {
     display: flex;
-    flex-direction: row;    
+    flex-direction: row;
 }
 
 .system-drive .tbreadcrumb li span {
@@ -667,6 +667,13 @@ div:where(.swal2-container) {
     display: block;
 }
 /****************************** FONT **************************************/
+@font-face {
+    font-family: 'Marker Felt';
+    font-style: normal;
+    font-weight: normal;
+    src: url(MarkerFelt.ttf) format('truetype');
+}
+
 @font-face {
     font-family: 'Source Sans Pro';
     font-style: normal;
@@ -949,7 +956,7 @@ table.vertical-middle td
     border: var(--bs-border-width) solid var(--bs-border-color);
     outline: none;
     border-radius: var(--bs-border-radius);
-    width: 100%; 
+    width: 100%;
 }/****************************** KANBAN **************************************/
 .kanban-item > .kanban-item-content > .tformrow {
     margin:0;
@@ -1047,13 +1054,13 @@ table.vertical-middle td
 }/********************************** MAILBOX *********************************************/
 .left-mailbox
 {
-    float: left; 
+    float: left;
     width: 250px;
     margin-right: 10px;
 }
 
 .right-mailbox
-{ 
+{
     overflow: hidden;
 }
 
@@ -1072,27 +1079,27 @@ table.vertical-middle td
     .navbar, footer {
         width: 100vw;
     }
-    
+
     main.content {
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
-    
+
     .hide-mobile
     {
         display: none !important;
     }
-    
+
     .card.mobile .card-header
     {
         display:block;
     }
-    
+
     .card.mobile .header-actions
     {
         display:grid;
     }
-    
+
     .system_contacts .system-contact
     {
         width: 100% !important;
@@ -1352,7 +1359,7 @@ table.vertical-middle td
     transition: all 0.35s ease-in-out;
     font-family: 'Source Sans Pro';
     z-index: 1;
-    
+
     position: sticky;
     top: 0;
     bottom: 0;

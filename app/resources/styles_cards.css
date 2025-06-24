@@ -26,6 +26,12 @@ h2 {
     border-radius: 16px;
 }
 
+.pokemon-name{
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
 .type-card{
     text-align: right;
 }
@@ -41,6 +47,7 @@ h2 {
     font-size: 14px;
     overflow-wrap: break-word;
     border: 1px solid #000;
+    font-family: Market Felt, fantasy;
 }
 
 .card-image-front img {
@@ -52,6 +59,11 @@ h2 {
     border-width: 2px;
     border-style: solid;
     overflow-wrap: break-word;
+}
+
+.img{
+    width: 100%;
+    height: 100%;
 }
 
 .card-footer {
