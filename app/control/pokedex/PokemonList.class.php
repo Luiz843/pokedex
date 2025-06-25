@@ -37,6 +37,9 @@ class PokemonList extends TPage
     private $cards;               // cards de pokemons
     private $panel_cards;          // painel de cards
     private $scroll_wrapper; // elemento de scroll para os cards
+    private $current_page = 1; // página atual para paginação
+    private $per_page = 4; // quantidade de pokemons por página
+    private $total_pages = 1; // total de páginas para paginação
 
     public function __construct()
     {
@@ -143,6 +146,10 @@ class PokemonList extends TPage
         try {
             $flag = false;
 
+            $id_param = isset($param['id']) ? $param['id'] : '';
+            $name_param = isset($param['name']) ? $param['name'] : '';
+            $tipo_param = isset($param['tipo_id']) ? $param['tipo_id'] : '';
+
             TTransaction::open('pokedex');
 
             // Carregar tipos antes de tudo
@@ -168,9 +175,18 @@ class PokemonList extends TPage
             }
 
             $repo = new TRepository('Pokemon');
-            $this->pokemons = $repo->load($criteria);
 
-            $this->scroll_wrapper = new TElement('div');
+            $count = (int) $repo->count($criteria, FALSE);
+            $this->total_pages = ceil($count / $this->per_page);
+
+            // Paginação
+            $this->per_page = 4;
+            $this->current_page = isset($param['page']) ? (int)$param['page'] : 1;
+            $offset = ($this->current_page - 1) * $this->per_page;
+            $criteria->setProperty('limit', $this->per_page);
+            $criteria->setProperty('offset', $offset);
+
+            $this->pokemons = $repo->load($criteria);
 
             if (!$this->pokemons) {
                 new TMessage('info', 'Nenhum Pokémon encontrado com os critérios informados.');
@@ -197,7 +213,27 @@ class PokemonList extends TPage
                     $id++;
                 }
                 $this->scroll_wrapper->add($this->cards);
-                $this->panel_cards->add($this->scroll_wrapper);
+
+                $this->form->setData((object)[
+                    'id' => $id_param,
+                    'name' => $name_param,
+                    'tipo_id' => $tipo_param
+                ]);
+
+                // Adiciona paginação
+                $pagination = new TElement('div');
+                $pagination->style = 'text-align:center; margin:20px;';
+                for ($i = 1; $i <= $this->total_pages; $i++) {
+                    $page_link = new TElement('a');
+                    $page_link->href = "index.php?class=PokemonList&page={$i}&id={$id_param}&name={$name_param}&tipo_id={$tipo_param}";
+                    $page_link->style = 'margin: 0 5px; font-size:18px;';
+                    $page_link->add($i);
+                    if ($i == $this->current_page) {
+                        $page_link->style .= 'font-weight:bold; color:#black;';
+                    }
+                    $pagination->add($page_link);
+                }
+                $this->scroll_wrapper->add($pagination);
             }
 
 
