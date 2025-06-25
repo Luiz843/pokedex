@@ -58,7 +58,7 @@ class PokemonForm extends TPage
         $descricao_label->setProperty('for', $descricao->getId(), true);
 
         // Tipo
-        $tipo = new TDBCombo('tipo', 'pokedex', 'Tipo', 'id', 'nome');
+        $tipo = new TDBCombo('tipo', 'pokedex', 'Tipo', 'id', 'name');
         $tipo->setSize('100%');
         $tipo_label = new TLabel('<b>Tipo: </b>');
         $tipo_label->setProperty('for', $tipo->getId(), true);
