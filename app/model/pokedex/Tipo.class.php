@@ -1,6 +1,8 @@
 <?php
 
+use Adianti\Database\TCriteria;
 use Adianti\Database\TRecord;
+use Adianti\Database\TRepository;
 
 /**
  * CalendarEvent Active Record
@@ -25,5 +27,25 @@ class Tipo extends TRecord
         parent::addAttribute('name_pt');
         parent::addAttribute('cor');
         parent::addAttribute('icone');
+    }
+
+
+    /**
+     * Método que retorna array associativo com os tipos
+     * @return array
+     */
+    public static function getTipos()
+    {
+        $repository = new TRepository('Tipo');
+        $criteria = new TCriteria;
+        $criteria->setProperty('order', 'id');
+        $tipos = $repository->load($criteria, FALSE);
+        $result = [];
+        if ($tipos) {
+            foreach ($tipos as $tipo) {
+                $result[$tipo->id] = strtoupper($tipo->name);
+            }
+        }
+        return $result;
     }
 }

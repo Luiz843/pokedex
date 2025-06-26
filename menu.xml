@@ -22,13 +22,18 @@
             </menuitem>
         </menu>
     </menuitem>
+    <menuitem label='Configuração dos pokemons'>
+        <icon>fa:cog fa-fw</icon>
+        <menu>
+            <menuitem label='Pokemons - Carregar API'>
+                <icon>fa:fa-regular fa-share-nodes</icon>
+                <action>ConfigPokedex</action>
+            </menuitem>
+        </menu>
+    </menuitem>
     <menuitem label='Pokedex'>
         <icon>fa:tablet-screen-button</icon>
         <menu>
-            <menuitem label='Pokemons - Configuração'>
-                <icon>fa:paw fa-fw</icon>
-                <action>ConfigPokedex</action>
-            </menuitem>
             <menuitem label='Pokemons - Cadastro'>
                 <icon>fa:paw fa-fw</icon>
                 <action>PokemonForm</action>
@@ -36,6 +41,15 @@
             <menuitem label='Pokemons - Listagem'>
                 <icon>fa:paw fa-fw</icon>
                 <action>PokemonList</action>
+            </menuitem>
+        </menu>
+    </menuitem>
+        <menuitem label='Mini Games'>
+        <icon>fa:fa-solid fa-gamepad</icon>
+        <menu>
+            <menuitem label='Jogo da Memória'>
+                <icon>fa:fa-solid fa-brain</icon>
+                <action>GameMemoria</action>
             </menuitem>
         </menu>
     </menuitem>

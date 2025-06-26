@@ -26,7 +26,7 @@ class PokemonList extends TPage
 {
 
     // Descrição do programa
-    const DESC = 'Pokemons';
+    const DESC = 'Listagem de Pokemons';
 
     // versão do programa
     const VERS = '1.00.00';
@@ -107,37 +107,11 @@ class PokemonList extends TPage
         $this->panel_cards->add($this->form);
         $this->panel_cards->add($this->scroll_wrapper);
 
-
-        // TScript::create("
-        //     let cards = document.querySelectorAll('.card-flipped');
-        //     cards.forEach(function(card) {
-        //         card.addEventListener('click', function() {
-        //             const front = card.querySelector('.pokemon-card-front');
-        //             const back = card.querySelector('.pokemon-card-back');
-        //             if (front.style.display !== 'none') {
-        //                 front.style.display = 'none';
-        //                 back.style.display = 'block';
-        //             } else {
-        //                 front.style.display = 'block';
-        //                 back.style.display = 'none';
-        //             }
-        //         });
-        //     });
-        // ");
-
-        // script para forçar layout horizontal
-        // TScript::create("
-        //     document.querySelectorAll('.card-wrapper').forEach(function(wrapper) {
-        //         wrapper.style.minWidth = 'max-content';
-        //     });
-        // ");
-
         // container final
         $conteiner = new TVBox();
         $conteiner->style = 'width: 100%; background: linear-gradient(to bottom, #fa9d9d, #f85f5f); padding: 20px;';
         $conteiner->add($this->panel_cards);
         parent::add($conteiner);
-        // $this->onReload();
     }
 
 
@@ -171,7 +145,7 @@ class PokemonList extends TPage
                 $flag = true;
             }
             if (!$flag) {
-                $criteria->add(new TFilter('id', 'IN', [18, 19, 20, 22]));
+                $criteria->add(new TFilter('id', 'IN', [1, 4, 7, 25]));
             }
 
             $repo = new TRepository('Pokemon');
