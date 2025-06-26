@@ -49,7 +49,7 @@
         <menu>
             <menuitem label='Jogo da Memória'>
                 <icon>fa:fa-solid fa-brain</icon>
-                <action>GameMemoria</action>
+                <action>StartGameMemoria</action>
             </menuitem>
         </menu>
     </menuitem>

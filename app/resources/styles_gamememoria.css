@@ -1,19 +1,94 @@
-.qtcards{
+.panel_config_gamememoria{
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    /* background: linear-gradient(to bottom, #f4f8ff, #f9fbff) !important; */
+}
 
+.panel-body{
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: linear-gradient(to bottom, #bcd3f2, #c4d7f5) !important;
 }
 
 .qtcards_label{
-
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+    font-size: 40px !important;
+    font-weight: bold !important;
+    text-shadow:    -1px -1px 0 #2b2d42,
+                    1px -1px 0 #2b2d42,
+                    -1px 1px 0 #2b2d42,
+                    1px 1px 0 #2b2d42 !important;
+    color: #483bff !important;
 }
 
-.check_tipos{
+.qtcards{
+    width: 100px !important;
+    height: 50px !important;
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+    font-size: 30px !important;
+    text-align: center !important;
+    border-radius: 10px !important;
+    border: 2px solid #483bff !important;
+    background-color: #f0f0f0 !important;
+}
+
+.check_tipos_label{
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+    font-size: 40px !important;
+    font-weight: bold !important;
+    text-shadow:    -1px -1px 0 #2b2d42,
+                    1px -1px 0 #2b2d42,
+                    -1px 1px 0 #2b2d42,
+                    1px 1px 0 #2b2d42 !important;
+    color: #483bff !important;
+}
+
+.fb-inline-field-container .toggle-wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 15px !important;
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+    font-size: 20px !important;
 
 }
 
 .btn_reload{
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+    font-size: 30px !important;
+    text-align: center !important;
+    border-radius: 10px !important;
+    border: 2px solid #483bff !important;
+    background-color: #e6ecff !important;
+    color: #483bff !important;
+    cursor: pointer !important;
+    margin-top: 40px !important;
 
 }
 
-.panel_cards{
+.btn_reload:hover {
+    background-color: #483bff !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    animation: pulse 1s infinite !important;
+    box-shadow: 0 4px 20px rgba(72, 59, 255, 0.4) !important;
+}
 
+.btn_reload {
+    transition: all 0.3s ease !important;
+    transform: scale(1.05) !important;
+    box-shadow: 0 2px 10px rgba(72, 59, 255, 0.2) !important;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
