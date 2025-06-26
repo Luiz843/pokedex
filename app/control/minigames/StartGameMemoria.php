@@ -60,7 +60,7 @@ class StartGameMemoria extends TPage
         $tipos_label->setProperty('for', $tipos->getId(), true);
 
         $bt_reload = new TButton('bt_reload');
-        $bt_reload->setAction(new TAction([$this, 'onReload']), 'Start Game');
+        $bt_reload->setAction(new TAction([$this, 'onStart']), 'Start Game');
         $bt_reload->setImage('fa-regular fa-play');
         $bt_reload->setLabel('Start Game');
         $bt_reload->class = 'btn_reload';
@@ -83,29 +83,49 @@ class StartGameMemoria extends TPage
         $conteiner->style = 'width: 100%; height: 100%; background: linear-gradient(to bottom, #dfeaff, #e6ecff); padding: 30px;';
         $conteiner->add($this->panel_cards);
 
-        TScript::create("
+        TScript::create('
             setTimeout(function() {
-                let classform = document.querySelector('.tabpanel_form_pokemon_list');
+                let classform = document.querySelector(".tabpanel_form_pokemon_list");
                 if (classform) {
-                    classform.classList.add('panel_config_gamememoria');
+                    classform.classList.add("panel_config_gamememoria");
                 }
-                let classtab = document.querySelector('.panel-body');
+                let classtab = document.querySelector(".panel-body");
                 if (classtab) {
-                    classtab.classList.add('panelbod_gamememoria');
+                    classtab.classList.add("panelbod_gamememoria");
                 }
             }, 300);
-        ");
+
+            function adicionarPokebolas() {
+                const container = document.querySelector(".panel-body");
+                if (!container) {
+                    console.log("Container não encontrado");
+                    return;
+                }
+                const numPokebolas = Math.floor(Math.random() * 5) + 9;
+                for(let i = 0; i < numPokebolas; i++) {
+                    const pokebola = document.createElement("div");
+                    pokebola.className = "pokebola-bg";
+                    const tamanho = Math.random() * 30 + 40;
+                    pokebola.style.width = tamanho + "px";
+                    pokebola.style.height = tamanho + "px";
+                    const top = Math.random() * 80;
+                    const left = Math.random() * 80;
+                    pokebola.style.top = top + "%";
+                    pokebola.style.left = left + "%";
+                    pokebola.style.zIndex = "9999";
+                    pokebola.style.position = "absolute";
+                    pokebola.style.pointerEvents = "none";
+                    container.appendChild(pokebola);
+                }
+            }
+            setTimeout(adicionarPokebolas, 500);
+        ');
         parent::add($conteiner);
     }
 
 
     public function onReload()
     {
-        try {
-
-        } catch (Exception $e) {
-            new TMessage('error', 'Erro ao iniciar o game: ' . $e->getMessage());
-        }
     }
 
 
@@ -115,32 +135,20 @@ class StartGameMemoria extends TPage
      * @return void
      */
     public function onStart($param = null){
-        // checa se o formulário foi preenchido
-        if ($this->form->validate()) {
-            $data = $this->form->getData();
-            $quantidade_cartas = $data->quantidade_cartas;
-            $tipos = $data->check_tipos;
 
-            // validações
-            if (empty($quantidade_cartas)) {
-                new TMessage('error', 'Preencha a quantidade de cartas!');
-                return;
-            }
-            if (empty($tipos)) {
-                new TMessage('error', 'Selecione pelo menos um tipo de pokemon!');
-                return;
-            }
-            // inicia o jogo
-            $action = new TAction(['GameMemoriaJogo', 'show']);
-            $action->setParameters([
-                'quantidade_cartas' => $quantidade_cartas,
-                'tipos' => $tipos
-            ]);
-            $action->serialize();
+        $data = $this->form->getData();
+        $qtpares = $data->quantidade_cartas;
+        $tipos = $data->check_tipos;
 
-        } else {
-            new TMessage('error', 'Preencha todos os campos!');
+        if($qtpares <= 0){
+            new TMessage('error', 'Por favor, informe a quantidade de pares de cartas');
         }
+        if(isset($tipos) && count($tipos) <= 0){
+            new TMessage('error', 'Por favor, selecione pelo menos um tipo de pokemon');
+        }
+        var_dump($qtpares);
+        var_dump($tipos);
+
     }
 
 
