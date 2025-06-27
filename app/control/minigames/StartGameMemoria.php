@@ -2,7 +2,9 @@
 
 use Adianti\Control\TAction;
 use Adianti\Control\TPage;
-
+use Adianti\Database\TCriteria;
+use Adianti\Database\TFilter;
+use Adianti\Database\TRepository;
 use Adianti\Database\TTransaction;
 use Adianti\Widget\Base\TScript;
 use Adianti\Widget\Container\TPanelGroup;
@@ -12,7 +14,6 @@ use Adianti\Widget\Form\TButton;
 use Adianti\Widget\Form\TCheckGroup;
 use Adianti\Widget\Form\TEntry;
 use Adianti\Widget\Form\TLabel;
-
 use Adianti\Wrapper\BootstrapFormBuilder;
 
 /**
@@ -53,7 +54,7 @@ class StartGameMemoria extends TPage
         $tipos = new TCheckGroup('check_tipos');
         $tipos->setLayout('horizontal');
         $tipos->addItems($this->tipos);
-        $tipos->setValue(array_keys($this->tipos));
+        // $tipos->setValue(array_keys($this->tipos));
         $tipos->class = 'check_tipos';
         $tipos_label = new TLabel('<b>Tipos dos pokemons</b>');
         $tipos_label->class = 'check_tipos_label';
@@ -124,9 +125,7 @@ class StartGameMemoria extends TPage
     }
 
 
-    public function onReload()
-    {
-    }
+    public function onReload() {}
 
 
     /**
@@ -134,21 +133,83 @@ class StartGameMemoria extends TPage
      * @param array $param
      * @return void
      */
-    public function onStart($param = null){
-
+    public function onStart($param = null)
+    {
+        $gogame = false;
         $data = $this->form->getData();
         $qtpares = $data->quantidade_cartas;
         $tipos = $data->check_tipos;
 
-        if($qtpares <= 0){
+        if ($qtpares <= 0) {
             new TMessage('error', 'Por favor, informe a quantidade de pares de cartas');
-        }
-        if(isset($tipos) && count($tipos) <= 0){
+            $gogame = false;
+        } else if (isset($tipos) && count($tipos) <= 0) {
             new TMessage('error', 'Por favor, selecione pelo menos um tipo de pokemon');
+            $gogame = false;
+        } else {
+            $gogame = true;
         }
-        var_dump($qtpares);
-        var_dump($tipos);
 
+        if ($gogame) {
+            // array de pokemos
+            $pokemons = [];
+
+            // abre transação
+            TTransaction::open('pokedex');
+
+            // Carregar tipos
+            foreach ($tipos as $key => $tipo) {
+                $tipos[$key] = Tipo::getTipoNameCorIcone($tipo);
+            }
+
+            // Verificação de segurança
+            if ($qtpares > 0 && count($tipos) > 0) {
+
+                foreach ($tipos as $key => $tipo) {
+                    $totalPokemonsTipos =+ Pokemon::where('tipo_id', '=', $tipo['id'])->count();
+                }
+                if($totalPokemonsTipos < $qtpares) {
+                    new TMessage('error', 'Não há pokémons suficientes para o número de pares selecionados.');
+                    TTransaction::close();
+                    return;
+                }
+
+                // 1 pokemon de cada tipo
+                $pokemonsMinimos = min(count($tipos), $qtpares);
+                for ($i = 0; $i < $pokemonsMinimos;) {
+                    $pokemonAleatorio = Pokemon::getPokemonRandByTipo($tipos[$i]['id']);
+                    if (!in_array($pokemonAleatorio, $pokemons)) {
+                        $pokemons[] = $pokemonAleatorio;
+                        $i++;
+                    }
+                }
+                // completa com pokemons aleatórios
+                $pokemonsRestantes = $qtpares - count($pokemons);
+                for ($i = 0; $i < $pokemonsRestantes;) {
+                    $tipoRandomKey = array_rand($tipos);
+                    $tipoRandomId = $tipos[$tipoRandomKey]['id'];
+                    $pokemonAleatorio = Pokemon::getPokemonRandByTipo($tipoRandomId);
+                    if (!in_array($pokemonAleatorio, $pokemons)) {
+                        $pokemons[] = $pokemonAleatorio;
+                        $i++;
+                    }
+                }
+            }
+            TTransaction::close();
+            // var_dump($pokemons);
+            // die();
+
+            $qtparesEscaped = (int)$qtpares;
+            $tiposEscaped = json_encode($tipos);
+            $pokemonsEscaped = json_encode($pokemons);
+            TScript::create("
+                localStorage.setItem('game_qtpares', '{$qtparesEscaped}');
+                localStorage.setItem('game_tipos', '{$tiposEscaped}');
+                localStorage.setItem('game_pokemons', '{$pokemonsEscaped}');
+                console.log('Daados salvos!');
+                window.location.href = 'minigames/html/memory_game.html';
+            ");
+        }
     }
 
 

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jogo da Memória Pokemon</title>
+    <meta charset="UTF-8">
+    <script src="../js/memory_game.js"></script>
+    <link rel="stylesheet" href="../css/memory_game.css">
+</head>
+<body>
+    <!-- Titulo -->
+    <header class="game-header">
+        <h1>Jogo da Memória</h1>
+    </header>
+
+    <!-- Barra Superior -->
+    <div>
+        <div>
+            <span><strong>Total:</strong><strong id="total-pairs"> 0 </strong> </strong></span>
+            <span><strong>Pares Encontrados:</strong><strong id="found-pairs"> 0 </strong> </strong></span>
+            <span><strong>Pares Faltantes:</strong><strong id="remaining-pairs"> 0 </strong> </strong></span>
+            <!-- <span><strong id="score">Pontuação: </strong></span> -->
+        </div>
+        <div>
+            <button id="Dica">Dica</button>
+            <button id="Reiniciar">Reiniciar</button>
+            <button id="Sair">Sair</button>
+        </div>
+    </div>
+
+    <!-- Barra Lateral -->
+    s<div>
+        <div>
+            <span id="titlePokemonEncontrado"><strong>Pokemons Encontrados:</strong></span>
+        </div>
+        <div>
+            <ul id="listaPokemonsEncontrados">
+                <!-- Lista de Pokemons Encontrados será preenchida aqui -->
+            </ul>
+        </div>
+        <div>
+            <span id="titlePokemonFaltante"><strong>Pokemons Faltantes:</strong></span>
+        </div>
+        <div>
+            <ul id="listaPokemonsFaltantes">
+                <!-- Lista de Pokemons Faltantes será preenchida aqui -->
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- Tabuleiro -->
+    <div class="game-container">
+        <div id="game-board" class="game-board">
+            <!-- Cartas do Jogo serão geradas aqui -->
+        </div>
+    </div>
+
+</body>
+</html>

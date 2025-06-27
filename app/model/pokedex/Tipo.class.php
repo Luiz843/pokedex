@@ -1,6 +1,7 @@
 <?php
 
 use Adianti\Database\TCriteria;
+use Adianti\Database\TFilter;
 use Adianti\Database\TRecord;
 use Adianti\Database\TRepository;
 
@@ -47,5 +48,31 @@ class Tipo extends TRecord
             }
         }
         return $result;
+    }
+
+
+    /**
+     * Método que retorna array associativo com o name, cor e icone
+     * @return array
+     * @param $id
+     */
+    public static function getTipoNameCorIcone($id){
+        $repository = new TRepository('Tipo');
+        $criteria = new TCriteria;
+        $criteria->add(new TFilter('id', '=', $id));
+        $tipo = $repository->load($criteria, FALSE);
+
+        if ($tipo) {
+            $tipo = $tipo[0];
+            return [
+                'id'    => $tipo->id,
+                'name'  => $tipo->name,
+                'cor'   => $tipo->cor,
+                'icone' => $tipo->icone
+            ];
+        } else {
+            return [];
+        }
+
     }
 }
