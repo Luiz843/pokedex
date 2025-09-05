@@ -42,51 +42,11 @@ Este projeto tem como objetivo praticar conceitos de estruturação de APIs REST
 
 ---
 
-## 🗂️ Estrutura de Diretórios
-
-```
-app/
-├── control/
-│   └── Api/
-│       ├── PokemonApiController.php
-│       ├── PokeApiProxyController.php
-│       └── TipoApiController.php
-├── service/
-│   ├── PokemonService.php
-│   ├── TipoService.php
-│   └── PokeApiClient.php
-├── model/
-│   ├── Pokemon.php
-│   └── Tipo.php
-├── database/
-│   └── pokemon.db
-├── cache/
-│   └── tipos_ptbr.json
-├── routes/
-│   └── api_routes.php (opcional)
-```
-
----
-
-## 📌 Considerações sobre boas práticas
-
-- **Endpoints personalizados** garantem autonomia sobre o formato dos dados e regras de negócio.
-- Evitar dependência direta da PokéAPI em tempo real melhora a **resiliência** e **velocidade**.
-- Utilizar **cache** para evitar múltiplas requisições repetidas.
-- Separação clara entre **controladores**, **serviços**, e **modelos** facilita testes e manutenção.
-
----
-
 ## 📚 Tecnologias
 
 - PHP com Adianti Framework
 - PokéAPI (https://pokeapi.co/)
-- SQLite (durante desenvolvimento) ou outro banco relacional
+- PostgreSQL
 - Formato JSON nas respostas da API
 
 ---
-
-## 🚀 Próxima Etapa
-
-Implementar o primeiro endpoint:
-- `GET /api/pokemons` → retorna os pokémons cadastrados no banco de dados.
