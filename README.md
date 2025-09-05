@@ -50,3 +50,8 @@ Este projeto tem como objetivo praticar conceitos de estruturação de APIs REST
 - Formato JSON nas respostas da API
 
 ---
+
+## 📷 Imagens
+
+<img width="1373" height="814" alt="image" src="https://github.com/user-attachments/assets/311e37ab-a48c-467e-babc-730e27e36c0e" />
+
